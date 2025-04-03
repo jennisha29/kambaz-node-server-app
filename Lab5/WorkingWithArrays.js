@@ -6,7 +6,7 @@ let todos = [
   ];
   
   export default function WorkingWithArrays(app) {
-    // GET all todos or filter by completed status
+    
     app.get("/lab5/todos", (req, res) => {
       const { completed } = req.query;
       if (completed !== undefined) {
@@ -18,7 +18,7 @@ let todos = [
       res.json(todos);
     });
   
-    // OLD: Create a new todo with GET (keep for backward compatibility)
+    
     app.get("/lab5/todos/create", (req, res) => {
       const newTodo = {
         id: new Date().getTime(),
@@ -30,7 +30,7 @@ let todos = [
       res.json(todos);
     });
   
-    // NEW: Create a new todo with POST
+    
     app.post("/lab5/todos", (req, res) => {
       const newTodo = {
         ...req.body,
@@ -40,7 +40,7 @@ let todos = [
       res.json(newTodo);
     });
   
-    // OLD: Delete a todo with GET (keep for backward compatibility)
+    
     app.get("/lab5/todos/:id/delete", (req, res) => {
       const { id } = req.params;
       const todoIndex = todos.findIndex(t => t.id === parseInt(id));
@@ -50,7 +50,7 @@ let todos = [
       res.json(todos);
     });
   
-    // NEW: Delete a todo with DELETE
+    
     app.delete("/lab5/todos/:id", (req, res) => {
       const { id } = req.params;
       const todoIndex = todos.findIndex(t => t.id === parseInt(id));
@@ -62,7 +62,7 @@ let todos = [
       res.sendStatus(200);
     });
   
-    // Update todo with PUT
+    
     app.put("/lab5/todos/:id", (req, res) => {
       const { id } = req.params;
       const todoIndex = todos.findIndex(t => t.id === parseInt(id));
@@ -79,7 +79,7 @@ let todos = [
       res.sendStatus(200);
     });
   
-    // Update todo properties using GET (old routes for compatibility)
+  
     app.get("/lab5/todos/:id/title/:title", (req, res) => {
       const { id, title } = req.params;
       const todo = todos.find(t => t.id === parseInt(id));
@@ -98,7 +98,7 @@ let todos = [
       res.json(todos);
     });
   
-    // Get todo by ID
+
     app.get("/lab5/todos/:id", (req, res) => {
       const { id } = req.params;
       const todo = todos.find(t => t.id === parseInt(id));

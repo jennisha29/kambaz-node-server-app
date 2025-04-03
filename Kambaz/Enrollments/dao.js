@@ -2,7 +2,7 @@ import Database from "../Database/index.js";
 import { v4 as uuidv4 } from "uuid";
 
 export function enrollUserInCourse(userId, courseId) {
-  // Check if enrollment already exists to prevent duplicates
+
   const existingEnrollment = Database.enrollments.find(
     e => e.user === userId && e.course === courseId
   );
@@ -16,7 +16,7 @@ export function enrollUserInCourse(userId, courseId) {
   return newEnrollment;
 }
 
-// Add these new functions
+
 export function findAllEnrollments() {
   return Database.enrollments;
 }
