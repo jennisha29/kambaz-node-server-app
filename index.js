@@ -1,4 +1,6 @@
+import "dotenv/config";
 import express from "express";
+import mongoose from "mongoose";
 import cors from "cors";
 import "dotenv/config";
 import session from "express-session";
@@ -10,14 +12,11 @@ import ModuleRoutes from "./Kambaz/Modules/routes.js";
 import AssignmentRoutes from "./Kambaz/Assignments/routes.js";
 import EnrollmentRoutes from "./Kambaz/Enrollments/routes.js";
 
-const app = express();
 
-app.use(
-  cors({
-    credentials: true,
-    origin: process.env.NETLIFY_URL || "http://localhost:5173",
-  })
-);
+const CONNECTION_STRING = process.env.MONGO_CONNECTION_STRING || "mongodb://127.0.0.1:27017/kambaz"
+mongoose.connect(CONNECTION_STRING);
+
+const app = express();
 
 const sessionOptions = {
   secret: process.env.SESSION_SECRET || "kambaz",
@@ -33,9 +32,14 @@ if (process.env.NODE_ENV !== "development") {
     domain: process.env.NODE_SERVER_DOMAIN,
   };
 }
-
 app.use(session(sessionOptions));
 
+app.use(
+  cors({
+    credentials: true,
+    origin: process.env.NETLIFY_URL || "http://localhost:5173",
+  })
+);
 
 app.use(express.json());
 
@@ -47,9 +51,4 @@ EnrollmentRoutes(app);
 Hello(app);
 Lab5(app);
 
-app.listen(4000);
-
-//   const port = process.env.PORT || 4000;
-// app.listen(port, () => {
-//   console.log(`Server running on port ${port}`);
-// });
+app.listen(process.env.PORT || 4000);
