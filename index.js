@@ -14,6 +14,16 @@ import EnrollmentRoutes from "./Kambaz/Enrollments/routes.js";
 
 
 const CONNECTION_STRING = process.env.MONGO_CONNECTION_STRING || "mongodb://127.0.0.1:27017/kambaz"
+
+//"mongodb+srv://jennishamartin163:jennimart@kambaz.sqj5dwo.mongodb.net/Kambaz"
+
+//"mongodb+srv://jennishamartin163:<db_password>@kambaz.sqj5dwo.mongodb.net/?retryWrites=true&w=majority&appName=Kambaz"
+
+//process.env.MONGO_CONNECTION_STRING || "mongodb://127.0.0.1:27017/kambaz"
+
+//"mongodb+srv://jennishamartin163:jennimart@kambaz.sqj5dwo.mongodb.net/Kambaz"
+
+console.log("Connection string being used:", CONNECTION_STRING);
 mongoose.connect(CONNECTION_STRING);
 
 const app = express();
