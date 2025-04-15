@@ -6,8 +6,6 @@ export function findAllCourses() {
 }
 
 export function findCoursesForEnrolledUser(userId) {
-  // This will be updated later to use MongoDB queries
-  // For now, return all courses
   return model.find();
 }
 
@@ -19,11 +17,7 @@ export function createCourse(course) {
 export function updateCourse(courseId, courseUpdates) {
   return model.updateOne({ _id: courseId }, { $set: courseUpdates });
  }
- 
-// export function deleteCourse(courseId) {
-//   return model.deleteOne({ _id: courseId });
-//  }
- 
+  
 export function deleteCourse(courseId) {
   console.log("Attempting to delete course with ID:", courseId);
   return model.deleteOne({ _id: courseId }).then(result => {
