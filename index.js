@@ -11,17 +11,10 @@ import CourseRoutes from "./Kambaz/Courses/routes.js";
 import ModuleRoutes from "./Kambaz/Modules/routes.js";
 import AssignmentRoutes from "./Kambaz/Assignments/routes.js";
 import EnrollmentRoutes from "./Kambaz/Enrollments/routes.js";
+import QuizRoutes from "./Kambaz/Quiz/routes.js";
 
 
 const CONNECTION_STRING = process.env.MONGO_CONNECTION_STRING || "mongodb://127.0.0.1:27017/kambaz"
-
-//"mongodb+srv://jennishamartin163:jennimart@kambaz.sqj5dwo.mongodb.net/Kambaz"
-
-//"mongodb+srv://jennishamartin163:<db_password>@kambaz.sqj5dwo.mongodb.net/?retryWrites=true&w=majority&appName=Kambaz"
-
-//process.env.MONGO_CONNECTION_STRING || "mongodb://127.0.0.1:27017/kambaz"
-
-//"mongodb+srv://jennishamartin163:jennimart@kambaz.sqj5dwo.mongodb.net/Kambaz"
 
 console.log("Connection string being used:", CONNECTION_STRING);
 mongoose.connect(CONNECTION_STRING);
@@ -58,6 +51,7 @@ CourseRoutes(app);
 ModuleRoutes(app);
 AssignmentRoutes(app);
 EnrollmentRoutes(app);
+QuizRoutes(app);
 Hello(app);
 Lab5(app);
 
