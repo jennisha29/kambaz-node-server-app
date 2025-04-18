@@ -16,15 +16,6 @@ import QuizRoutes from "./Kambaz/Quiz/routes.js";
 
 const CONNECTION_STRING =  process.env.MONGO_CONNECTION_STRING || "mongodb://127.0.0.1:27017/kambaz"
 
-// "mongodb+srv://jennishamartin163:jennusmart@quiz.71fk56m.mongodb.net/Quizzes"
-
-
-//"mongodb+srv://jennishamartin163:jennimart@kambaz.sqj5dwo.mongodb.net/Kambaz"
-// "mongodb+srv://jennishamartin163:jennusmart@quiz.71fk56m.mongodb.net/Quizzes"
-
-
-// process.env.MONGO_CONNECTION_STRING || "mongodb://127.0.0.1:27017/kambaz"
-
 console.log("Connection string being used:", CONNECTION_STRING);
 mongoose.connect(CONNECTION_STRING);
 

@@ -1,7 +1,6 @@
 import * as quizzesDao from "./dao.js";
 
 export default function QuizRoutes(app) {
-  // Get all quizzes
   app.get("/api/quizzes", async (req, res) => {
     try {
       const quizzes = await quizzesDao.findAllQuizzes();
@@ -12,7 +11,6 @@ export default function QuizRoutes(app) {
     }
   });
 
-  // Get quizzes for a specific course
   app.get("/api/courses/:courseId/quizzes", async (req, res) => {
     try {
       const { courseId } = req.params;
@@ -24,7 +22,6 @@ export default function QuizRoutes(app) {
     }
   });
 
-  // Get a specific quiz by ID
   app.get("/api/quizzes/:quizId", async (req, res) => {
     try {
       const { quizId } = req.params;
@@ -39,7 +36,6 @@ export default function QuizRoutes(app) {
     }
   });
 
-  // Create a new quiz for a course
   app.post("/api/courses/:courseId/quizzes", async (req, res) => {
     try {
       const { courseId } = req.params;
@@ -55,7 +51,6 @@ export default function QuizRoutes(app) {
     }
   });
 
-  // Update a quiz
   app.put("/api/quizzes/:quizId", async (req, res) => {
     try {
       const { quizId } = req.params;
@@ -74,7 +69,6 @@ export default function QuizRoutes(app) {
     }
   });
 
-  // Delete a quiz
   app.delete("/api/quizzes/:quizId", async (req, res) => {
     try {
       const { quizId } = req.params;
@@ -91,7 +85,6 @@ export default function QuizRoutes(app) {
     }
   });
 
-  // Publish/unpublish a quiz
   app.put("/api/quizzes/:quizId/publish", async (req, res) => {
     try {
       const { quizId } = req.params;
@@ -111,7 +104,6 @@ export default function QuizRoutes(app) {
     }
   });
 
-  // Quiz attempts endpoints
   app.post("/api/quizzes/:quizId/attempts", async (req, res) => {
     try {
       const { quizId } = req.params;
@@ -147,6 +139,44 @@ export default function QuizRoutes(app) {
     } catch (error) {
       console.error("Error fetching all quiz attempts:", error);
       res.status(500).json({ message: "Failed to fetch quiz attempts" });
+    }
+  });
+
+  app.post("/api/quizzes/:quizId/questions", async (req, res) => {
+    try {
+      const { quizId } = req.params;
+      const question = req.body;
+      
+      const updatedQuiz = await quizzesDao.addQuestionToQuiz(quizId, question);
+      res.json(updatedQuiz);
+    } catch (error) {
+      console.error("Error adding question:", error);
+      res.status(500).json({ message: "Failed to add question" });
+    }
+  });
+
+  app.put("/api/quizzes/:quizId/questions/:questionId", async (req, res) => {
+    try { 
+      const { quizId, questionId } = req.params;
+      const updates = req.body;
+      
+      const updatedQuiz = await quizzesDao.updateQuizQuestion(quizId, questionId, updates);
+      res.json(updatedQuiz);
+    } catch (error) {
+      console.error("Error updating question:", error);
+      res.status(500).json({ message: "Failed to update question" });
+    }
+  });
+
+  app.delete("/api/quizzes/:quizId/questions/:questionId", async (req, res) => {
+    try {
+      const { quizId, questionId } = req.params;
+      
+      const updatedQuiz = await quizzesDao.deleteQuizQuestion(quizId, questionId);
+      res.json(updatedQuiz);
+    } catch (error) {
+      console.error("Error deleting question:", error);
+      res.status(500).json({ message: "Failed to delete question" });
     }
   });
 }
