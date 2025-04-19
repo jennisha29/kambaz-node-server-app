@@ -45,6 +45,13 @@ const quizSchema = new mongoose.Schema(
     multipleAttempts: { type: Boolean, default: false },
     attempts: { type: Number, default: 1 },
     showCorrectAnswers: { type: Boolean, default: true },
+    showCorrectAnswerOption: { 
+      type: String, 
+      enum: ['immediately', 'after_due_date', 'after_attempt_1', 'after_attempt_2', 'after_attempt_3', 
+             'after_attempt_4', 'after_attempt_5', 'after_attempt_6', 'after_attempt_7', 'after_attempt_8', 
+             'after_attempt_9', 'after_attempt_10'],
+      default: 'immediately'
+    },
     accessCode: String,
     oneQuestionAtATime: { type: Boolean, default: true },
     webcamRequired: { type: Boolean, default: false },
